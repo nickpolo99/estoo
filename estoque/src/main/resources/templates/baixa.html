@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2 th:text="'Dar Baixa: ' + ${produto.nome}"></h2>
+        <p>Total Atual: <strong th:text="${produto.quantidadeTotal}"></strong></p>
+        
+        <form th:action="@{'/produtos/' + ${produto.id} + '/baixa'}" method="post">
+            <label>Quantidade utilizada:</label>
+            <input type="number" step="0.01" name="quantidade" required>
+            <small style="color: #666;">O sistema descontará automaticamente dos lotes mais antigos.</small>
+            
+            <button type="submit" class="btn btn-danger">Confirmar Baixa</button>
+        </form>
+        <a href="/produtos" style="display:block; margin-top:15px;">Cancelar</a>
+    </div>
+</body>
+</html>
