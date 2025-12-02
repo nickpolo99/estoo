@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/style.css">
+    <title>Estoque</title>
+</head>
+<body>
+    <div class="navbar">
+        <h2>Sistema Restaurante</h2>
+        <div>
+            <span>Olá, Admin</span>
+            <a href="/logout">Sair</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h1>Estoque Atual</h1>
+            <a href="/produtos/novo" class="btn">Novo Produto</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Produto</th>
+                    <th>Total</th>
+                    <th>Mínimo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${produtos}">
+                    <td>
+                        <img th:if="${p.imagem}" th:src="@{'/imagens/' + ${p.imagem}}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                    </td>
+                    <td th:text="${p.nome}"></td>
+                    <td>
+                        <span th:text="${p.quantidadeTotal}"></span> 
+                        <span th:text="${p.unidade}"></span>
+                    </td>
+                    <td th:text="${p.estoqueMinimo}"></td>
+                    <td>
+                        <a th:href="@{'/produtos/' + ${p.id} + '/lotes'}" class="btn" style="font-size:12px;">Entrada/Lotes</a>
+                        <a th:href="@{'/produtos/' + ${p.id} + '/baixa'}" class="btn btn-danger" style="font-size:12px;">Dar Baixa</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
